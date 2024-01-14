@@ -21,13 +21,23 @@
     "noFallthroughCasesInSwitch": true,
     "isolatedModules": true,
     "noEmit": true,
+    "jsx": "react",
     "baseUrl": "./src",
     "paths": {
-      "@figliolia/stealth-core": [
-        "core/index.ts"
+      "Components/*": [
+        "./Root/*"
       ],
-      "@figliolia/stealth-driver": [
-        "driver/index.ts"
+      "Models/*": [
+        "./Models/*"
+      ],
+      "Pages/*": [
+        "./Pages/*"
+      ],
+      "Root/*": [
+        "./Root/*"
+      ],
+      "State/*": [
+        "./State/*"
       ]
     }
   },
@@ -37,7 +47,7 @@
     "cd",
     "*.json",
     "*.ts",
-    ".*.js"
+    "*.js"
   ],
   "exclude": [
     "__Stealth__",
