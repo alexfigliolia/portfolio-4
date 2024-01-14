@@ -1,0 +1,7 @@
+@import "Styles/variables.scss";
+
+:export {
+  smallScreenTransition: $smallScreenTransition;
+  largeScreenTransition: $largeScreenTransition;
+  screenInnerTransition: $screenInnerTransition;
+}

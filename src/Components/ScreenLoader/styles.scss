@@ -1,0 +1,11 @@
+@import "Styles/variables.scss";
+
+.screen-loader {
+	height: 100vh;
+	width: 100%;
+	@include center;
+	background: linear-gradient(to top, #4cbdd7, #2193b0);
+	background: linear-gradient(to top, #0f2027, #203a43, #2c5364);
+	background: linear-gradient(to top, #4e54c8, #8f94fb);
+	
+}

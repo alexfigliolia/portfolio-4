@@ -1,15 +1,9 @@
 import path from "path";
 import { ChildProcess } from "@figliolia/child-process";
-import { Zombies } from "../cleanup";
 
 export class Jest {
-  public static async run() {
-    try {
-      const Jest = this.runTests();
-      await Jest.handler;
-    } finally {
-      await Zombies.kill();
-    }
+  public static run() {
+    return this.runTests().handler;
   }
 
   private static runTests() {

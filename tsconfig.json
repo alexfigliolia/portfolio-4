@@ -25,7 +25,13 @@
     "baseUrl": "./src",
     "paths": {
       "Components/*": [
-        "./Root/*"
+        "./Components/*"
+      ],
+      "Images/*": [
+        "./Images/*"
+      ],
+      "Icons/*": [
+        "./Icons/*"
       ],
       "Models/*": [
         "./Models/*"
@@ -38,6 +44,12 @@
       ],
       "State/*": [
         "./State/*"
+      ],
+      "Styles/*": [
+        "./Styles/*"
+      ],
+      "Tools/*": [
+        "./Tools/*"
       ]
     }
   },
