@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Page } from "Components/Page";
 import type { IScreen } from "Models/types";
-import { Routing } from "State/Routing";
 import "./styles.scss";
+import { AlexText } from "Components/AlexText";
+import { HomeButton } from "Components/HomeButton";
 
 export default class HomeScreen extends Component<IScreen> {
   override shouldComponentUpdate() {
@@ -14,8 +15,8 @@ export default class HomeScreen extends Component<IScreen> {
     return (
       <Page name="home">
         <div style={{ height, width }}>
-          Home!{" "}
-          <button onClick={() => Routing.changeRoute("#Work")}>Hello</button>
+          <AlexText />
+          <HomeButton />
         </div>
       </Page>
     );

@@ -2,10 +2,16 @@
 
 .page.home {
 	@include center;
+	text-align: center;
 	background: url("Images/background-small.webp") no-repeat center;
 	background-size: cover;
+	perspective: 1000px;
 	@media #{$mq-670} {
 		background: url("Images/background-large.webp") no-repeat center;
 		background-size: cover;
+	}
+	&>div {
+		@include center;
+		flex-direction: column;
 	}
 }

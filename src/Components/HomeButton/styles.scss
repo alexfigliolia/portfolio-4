@@ -1,0 +1,87 @@
+@import "Styles/variables.scss";
+
+.home-button {
+	margin-top: 40px;
+	&>.outline-button {
+		color: transparent;
+		text-shadow: none;
+		font-size: 1.2em;
+		transition: transform 0.5s 0s, box-shadow 0.5s 0s, color 0.3s 3s, text-shadow 0.3s 3s;
+		&:after,
+		&:before {
+			transform: scaleX(0);
+			transform-origin: 0% 50%;
+			transition: height 0.4s, transform 0.4s;
+		}
+		&:before {
+			transform-origin: 100% 50%;
+		}
+		&>div {
+			padding: 20px 50px;
+			&:after,
+			&:before {
+				transform-origin: 50% 0%;
+				transform: scaleY(0);
+				transition: transform 0.4s 0.4s;
+			}
+			&::after {
+				transform-origin: 50% 100%;
+			}
+		}
+		@media #{$mq-670} {
+			font-size: 1.5em;
+			&>div {
+				padding: 22.5px 60px;
+			}
+		}
+		@media #{$mq-1350} {
+			font-size: 1.75em;
+			&>div {
+				padding: 25px 70px;
+			}
+		}
+	}
+}
+
+.home-button > .outline-button.active {
+	color: #fff;
+	text-shadow: 0px 2.5px 5px rgba(#000, 0.8), 0px 0px 7.5px rgba(#000, 0.5);
+	&:after,
+	&:before {
+		transform: scaleX(1);
+		transition: height 0.4s, transform 0.4s 2.3s;
+	}
+	&>div {
+		&:after,
+		&:before {
+			transform: scaleY(1);
+			transition: transform 0.4s 2.7s;
+		}
+	}
+	&:hover {
+		color: #000;
+		text-shadow: none;
+		transition: transform 0.5s 0s, box-shadow 0.5s 0s, color 0.3s 0s, text-shadow 0.3s 0s;
+	}
+}
+
+.home-button > .outline-button.active.reset {
+	transition: transform 0.5s 0s, box-shadow 0.5s 0s, color 0.3s 0.1s, text-shadow 0.3s 0.1s;
+	&:after,
+	&:before {
+		transform: scaleX(1);
+		transition: height 0.4s;
+	}
+	&>div {
+		&:after,
+		&:before {
+			transform: scaleY(1);
+			transition: transform 0.4s 2.7s;
+		}
+	}
+	&:hover {
+		color: #000;
+		text-shadow: none;
+		transition: transform 0.5s 0s, box-shadow 0.5s 0s, color 0.3s 0s, text-shadow 0.3s 0s;
+	}
+}

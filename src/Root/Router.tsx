@@ -1,7 +1,9 @@
+import type { IRouting } from "Models/types";
+import { Routing, connectRouter } from "State/Routing";
 import type { lazy } from "react";
 import React, { Component, startTransition } from "react";
 
-export default class Router extends Component<Props, State> {
+class RouteRenderer extends Component<Props, State> {
   state: State = { Page: null };
   constructor(props: Props) {
     super(props);
@@ -13,19 +15,26 @@ export default class Router extends Component<Props, State> {
     window.addEventListener("hashchange", this.hashChange);
   }
 
+  override UNSAFE_componentWillReceiveProps({
+    routes,
+    routeName,
+  }: Readonly<Props>) {
+    if (routeName in routes) {
+      this.setState({ Page: routes[routeName] });
+    } else {
+      this.setState({ Page: null });
+    }
+  }
+
   override componentWillUnmount() {
     window.removeEventListener("hashchange", this.hashChange);
   }
 
   private hashChange() {
     startTransition(() => {
-      const { routes, default: defaultRoute } = this.props;
+      const { default: defaultRoute } = this.props;
       const hash = window.location.hash.slice(1).toLowerCase() || defaultRoute;
-      if (hash in routes) {
-        this.setState({ Page: routes[hash] });
-      } else {
-        this.setState({ Page: null });
-      }
+      Routing.changeRoute(hash);
     });
   }
 
@@ -40,9 +49,16 @@ export default class Router extends Component<Props, State> {
 
 interface Props {
   default: string;
+  routeName: string;
   routes: Record<string, ReturnType<typeof lazy>>;
 }
 
 interface State {
   Page: ReturnType<typeof lazy> | null;
 }
+
+const mSTP = ({ routeName }: IRouting) => {
+  return { routeName };
+};
+
+export const Router = connectRouter(mSTP)(RouteRenderer);

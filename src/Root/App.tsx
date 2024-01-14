@@ -5,7 +5,7 @@ import { TaskQueue } from "Tools/TaskQueue";
 import { Screen } from "Components/Screen";
 import { ScreenLoader } from "Components/ScreenLoader";
 import { Preloader } from "Tools/Preloader";
-import Router from "./Router";
+import { Router } from "./Router";
 
 export class App extends Component<Props> {
   static routes = {
@@ -19,6 +19,10 @@ export class App extends Component<Props> {
     Routing.initialize();
     ScreenState.initialize();
     Preloader.initialize();
+  }
+
+  public override shouldComponentUpdate() {
+    return false;
   }
 
   public override componentWillUnmount() {

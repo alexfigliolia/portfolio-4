@@ -1,0 +1,72 @@
+@import "Styles/variables.scss";
+
+
+.outline-button {
+	outline: none;
+	border: none;
+	margin: 0;
+	user-select: none;
+	position: relative;
+	transform: skew(-5deg);
+	font-weight: 900;
+	color: #fff;
+	text-transform: uppercase;
+	background-color: transparent;
+	font-size: 1.75em;
+	letter-spacing: -1px;
+	@include center;
+	box-shadow: none;
+	transform-style: preserve-3d;
+	text-shadow: 0px 2.5px 5px rgba(#000, 0.8), 0px 0px 7.5px rgba(#000, 0.5);
+	transition: transform 0.5s 0s, box-shadow 0.5s 0s, color 0.3s 0.1s, text-shadow 0.3s 0.1s;
+	&:after,
+	&:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: -10%;
+		height: 2px;
+		width: 65%;
+		z-index: 2;
+		background-color: #fff;
+		transition: height 0.4s;
+	}
+	&::after {
+		top: auto;
+		bottom: 0;
+		left: auto;
+		right: -10%;
+	}
+	&>div {
+		user-select: none;
+		pointer-events: none;
+		padding: 25px 60px;
+		z-index: 3;
+		&:after,
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 50%;
+			width: 2px;
+			background-color: #fff;
+		}
+		&::after {
+			top: auto;
+			bottom: 0;
+			left: auto;
+			right: 0;
+		}
+	}
+	&:hover {
+		color: #000;
+		text-shadow: none;
+		transition: transform 0.5s 0s, box-shadow 0.5s 0s, color 0.3s 0s, text-shadow 0.3s 0s;
+		&:after,
+		&:before {
+			height: 100%;
+		}
+	}
+}
+

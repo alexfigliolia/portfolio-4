@@ -1,6 +1,8 @@
 export interface IRouting {
-  loading: boolean;
   classes: string;
+  loading: boolean;
+  routeName: string;
+  screenActive: boolean;
 }
 
 export interface IScreen {

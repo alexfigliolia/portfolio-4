@@ -16,6 +16,8 @@ export class RoutingModel extends BaseModel<IRouting> {
   constructor() {
     super("Router", {
       loading: true,
+      routeName: "home",
+      screenActive: false,
       classes: "screen shrink flip",
     });
   }
@@ -26,52 +28,65 @@ export class RoutingModel extends BaseModel<IRouting> {
     TaskQueue.deferTask(() => {
       this.flip();
       TaskQueue.deferTask(() => {
-        window.location.hash = hash;
+        this.activateScreen(false);
+        this.setRouteName(hash);
         this.initialize(1000);
       }, RoutingModel.screenInnerTransition);
     }, RoutingModel.shrinkDuration);
   }
 
-  public initialize(wait = 1500, callback?: () => void) {
+  public initialize(wait = 2500) {
     TaskQueue.deferTask(() => {
       this.unFlip();
       this.loading(false);
       TaskQueue.deferTask(() => {
         this.unShrink();
         TaskQueue.deferTask(() => {
-          callback?.();
+          this.activateScreen();
         }, RoutingModel.shrinkDuration);
       }, RoutingModel.screenInnerTransition);
     }, wait);
   }
 
   public loading(loading: boolean) {
-    return this.update(state => {
+    this.update(state => {
       state.loading = loading;
     });
   }
 
   public shrink() {
-    return this.update(state => {
+    this.update(state => {
       state.classes = state.classes + " shrink";
     });
   }
 
   public unShrink() {
-    return this.update(state => {
+    this.update(state => {
       state.classes = state.classes.replace(" shrink", "");
     });
   }
 
   public flip() {
-    return this.update(state => {
+    this.update(state => {
       state.classes = state.classes + " flip";
     });
   }
 
   public unFlip() {
-    return this.update(state => {
+    this.update(state => {
       state.classes = state.classes.replace(" flip", "");
+    });
+  }
+
+  private activateScreen(active = true) {
+    this.update(state => {
+      state.screenActive = active;
+    });
+  }
+
+  public setRouteName(hash: string) {
+    this.update(state => {
+      state.routeName = hash;
     });
   }
 
