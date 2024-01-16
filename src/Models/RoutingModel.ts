@@ -30,12 +30,12 @@ export class RoutingModel extends BaseModel<IRouting> {
       TaskQueue.deferTask(() => {
         this.activateScreen(false);
         this.setRouteName(hash);
-        this.initialize(1000);
+        this.initialize();
       }, RoutingModel.screenInnerTransition);
     }, RoutingModel.shrinkDuration);
   }
 
-  public initialize(wait = 2000) {
+  public initialize(wait = 1000) {
     TaskQueue.deferTask(() => {
       this.unFlip();
       this.loading(false);

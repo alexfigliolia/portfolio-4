@@ -18,14 +18,24 @@ import EatLarge from "Images/republic-large.jpg";
 
 export class Preloader {
   public static initialize() {
-    const loaded = [];
+    const loadFNs: Promise<unknown>[] = [];
+    const loaded: HTMLImageElement[] = [];
     const imgs =
       Screen.getState().width >= 670 ? this.largeImages : this.smallImages;
     for (let i = 0; i < imgs.length; i++) {
       const img = new Image();
       img.src = imgs[i];
       loaded[i] = img;
+      loadFNs[i] = this.promisify(img);
     }
+    return Promise.all(loadFNs);
+  }
+
+  private static promisify(image: HTMLImageElement) {
+    return new Promise(resolve => {
+      image.onload = resolve;
+      image.onerror = resolve;
+    });
   }
 
   private static readonly smallImages = [

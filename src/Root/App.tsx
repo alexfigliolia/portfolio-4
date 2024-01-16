@@ -5,6 +5,7 @@ import { TaskQueue } from "Tools/TaskQueue";
 import { Screen } from "Components/Screen";
 import { ScreenLoader } from "Components/ScreenLoader";
 import { Preloader } from "Tools/Preloader";
+import { TimedPromise } from "Tools/TimedPromise";
 import { Router } from "./Router";
 
 export class App extends Component<Props> {
@@ -17,8 +18,12 @@ export class App extends Component<Props> {
 
   public override componentDidMount() {
     ScreenState.initialize();
-    Preloader.initialize();
-    Routing.initialize();
+    void new TimedPromise({
+      threshold: 2000,
+      task: () => Preloader.initialize(),
+      onReject: ({ remainingMS }) => Routing.initialize(remainingMS),
+      onResolve: ({ remainingMS }) => Routing.initialize(remainingMS),
+    }).race();
   }
 
   public override shouldComponentUpdate() {
