@@ -16,9 +16,9 @@ export class App extends Component<Props> {
   };
 
   public override componentDidMount() {
-    Routing.initialize();
     ScreenState.initialize();
     Preloader.initialize();
+    Routing.initialize();
   }
 
   public override shouldComponentUpdate() {

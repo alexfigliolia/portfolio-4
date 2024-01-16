@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button3D } from "Components/Button3D";
 import type { IRouting } from "Models/types";
-import { Routing, connectRouter } from "State/Routing";
+import { connectRouter } from "State/Routing";
 import "./styles.scss";
 
 export class HomeButtonRenderer extends Component<Props> {

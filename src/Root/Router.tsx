@@ -11,7 +11,6 @@ class RouteRenderer extends Component<Props, State> {
   }
 
   override componentDidMount() {
-    this.hashChange();
     window.addEventListener("hashchange", this.hashChange);
   }
 

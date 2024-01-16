@@ -57,9 +57,10 @@
     "src",
     "ci",
     "cd",
-    "*.json",
-    "*.ts",
-    "*.js"
+    ".eslintrc.js",
+    "**/*.json",
+    "**/*.ts",
+    "**/*.js"
   ],
   "exclude": [
     "__Stealth__",

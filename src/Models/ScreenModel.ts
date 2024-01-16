@@ -19,7 +19,7 @@ export class ScreenModel extends BaseModel<IScreen> {
   }
 
   public onResize() {
-    this.update(state => {
+    this.priorityUpdate(state => {
       state.width = window.innerWidth;
       state.height = window.innerHeight;
     });

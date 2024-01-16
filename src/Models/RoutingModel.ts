@@ -35,7 +35,7 @@ export class RoutingModel extends BaseModel<IRouting> {
     }, RoutingModel.shrinkDuration);
   }
 
-  public initialize(wait = 2500) {
+  public initialize(wait = 2000) {
     TaskQueue.deferTask(() => {
       this.unFlip();
       this.loading(false);
