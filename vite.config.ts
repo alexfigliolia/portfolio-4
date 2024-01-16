@@ -32,7 +32,9 @@ export default defineConfig({
   build: {
     minify: "terser",
     target: "es2015",
+    outDir: "build",
   },
+  base: process.env.NODE_ENV !== "production" ? "/" : "/portfolio-4",
   plugins: [
     react(),
     createHtmlPlugin({
