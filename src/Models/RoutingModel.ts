@@ -22,20 +22,21 @@ export class RoutingModel extends BaseModel<IRouting> {
     });
   }
 
-  public changeRoute(hash: string) {
-    this.loading(true);
-    this.shrink();
-    TaskQueue.deferTask(() => {
-      this.flip();
+  public flipScreen() {
+    return new Promise<void>(resolve => {
+      this.loading(true);
+      this.shrink();
       TaskQueue.deferTask(() => {
-        this.activateScreen(false);
-        this.setRouteName(hash);
-        this.initialize();
-      }, RoutingModel.screenInnerTransition);
-    }, RoutingModel.shrinkDuration);
+        this.flip();
+        TaskQueue.deferTask(() => {
+          this.activateScreen(false);
+          resolve();
+        }, RoutingModel.screenInnerTransition);
+      }, RoutingModel.shrinkDuration);
+    });
   }
 
-  public initialize(wait = 1000) {
+  public initialize(wait = 1000, cb?: () => void) {
     TaskQueue.deferTask(() => {
       this.unFlip();
       this.loading(false);
@@ -43,6 +44,7 @@ export class RoutingModel extends BaseModel<IRouting> {
         this.unShrink();
         TaskQueue.deferTask(() => {
           this.activateScreen();
+          cb?.();
         }, RoutingModel.shrinkDuration);
       }, RoutingModel.screenInnerTransition);
     }, wait);

@@ -3,12 +3,7 @@ export type Task<T> = () => Promise<T>;
 export interface ITimedPromise<T> {
   task: Task<T>;
   threshold: number;
-  onReject: (result: TimedPromiseRejection) => void;
-  onResolve: (result: TimedPromiseResolution<T>) => void;
 }
-
-export type OnRejectFN = (result: TimedPromiseRejection) => void;
-export type OnResultFN<T> = (result: TimedPromiseResolution<T>) => void;
 
 interface TimedPromiseResult<T, R extends boolean> {
   result: T;
@@ -16,5 +11,5 @@ interface TimedPromiseResult<T, R extends boolean> {
   remainingMS: number;
 }
 
-type TimedPromiseResolution<T> = TimedPromiseResult<T, false>;
-type TimedPromiseRejection = TimedPromiseResult<unknown, true>;
+export type TimedPromiseResolution<T> = TimedPromiseResult<T, false>;
+export type TimedPromiseRejection = TimedPromiseResult<unknown, true>;

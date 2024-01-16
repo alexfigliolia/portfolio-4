@@ -1,28 +1,28 @@
-import type { IRouting } from "Models/types";
-import { Routing, connectRouter } from "State/Routing";
-import type { lazy } from "react";
-import React, { Component, startTransition } from "react";
+import type { ComponentType } from "react";
+import React, { Component } from "react";
+import { Routing } from "State/Routing";
+import { TaskQueue } from "Tools/TaskQueue";
+import type { TimedPromiseResolution } from "Tools/TimedPromise";
+import { TimedPromise } from "Tools/TimedPromise";
+import type { ComponentModule } from "./types";
 
-class RouteRenderer extends Component<Props, State> {
+export class Router<T extends ComponentModule> extends Component<
+  Props<T>,
+  State
+> {
   state: State = { Page: null };
-  constructor(props: Props) {
+  initialRoute: keyof Props<T>["routes"];
+  initialLoad: Promise<TimedPromiseResolution<T>>;
+  constructor(props: Props<T>) {
     super(props);
+    this.initialRoute = this.currentRoute;
+    this.initialLoad = this.createLoader(this.initialRoute).race();
     this.hashChange = this.hashChange.bind(this);
   }
 
-  override componentDidMount() {
+  override async componentDidMount() {
     window.addEventListener("hashchange", this.hashChange);
-  }
-
-  override UNSAFE_componentWillReceiveProps({
-    routes,
-    routeName,
-  }: Readonly<Props>) {
-    if (routeName in routes) {
-      this.setState({ Page: routes[routeName] });
-    } else {
-      this.setState({ Page: null });
-    }
+    this.onRouteLoaded(this.initialRoute, await this.initialLoad);
   }
 
   override componentWillUnmount() {
@@ -30,11 +30,36 @@ class RouteRenderer extends Component<Props, State> {
   }
 
   private hashChange() {
-    startTransition(() => {
-      const { default: defaultRoute } = this.props;
-      const hash = window.location.hash.slice(1).toLowerCase() || defaultRoute;
-      Routing.changeRoute(hash);
+    const hash = this.currentRoute;
+    void Routing.flipScreen().then(async () => {
+      try {
+        const Task = this.createLoader(hash, 1000);
+        this.onRouteLoaded(hash, await Task.race());
+      } catch (error) {
+        // silence
+      }
     });
+  }
+
+  private onRouteLoaded(
+    hash: string,
+    { result, remainingMS }: TimedPromiseResolution<T>,
+  ) {
+    this.setState({ Page: result.default }, () => {
+      TaskQueue.deferTask(() => {
+        Routing.initialize(remainingMS, () => {
+          Routing.setRouteName(hash);
+        });
+      }, remainingMS || 300);
+    });
+  }
+
+  private createLoader(hash: keyof Props<T>["routes"], threshold = 2000) {
+    return new TimedPromise(() => this.props.routes[hash](), threshold);
+  }
+
+  private get currentRoute() {
+    return window.location.hash.slice(1).toLowerCase() || this.props.default;
   }
 
   override render() {
@@ -46,18 +71,11 @@ class RouteRenderer extends Component<Props, State> {
   }
 }
 
-interface Props {
+interface Props<T extends ComponentModule> {
   default: string;
-  routeName: string;
-  routes: Record<string, ReturnType<typeof lazy>>;
+  routes: Record<string, () => Promise<T>>;
 }
 
 interface State {
-  Page: ReturnType<typeof lazy> | null;
+  Page: ComponentType | null;
 }
-
-const mSTP = ({ routeName }: IRouting) => {
-  return { routeName };
-};
-
-export const Router = connectRouter(mSTP)(RouteRenderer);

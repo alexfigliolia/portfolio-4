@@ -1,29 +1,37 @@
-import React, { Component, lazy } from "react";
-import { Routing } from "State/Routing";
+import React, { Component } from "react";
 import { Screen as ScreenState } from "State/Screen";
 import { TaskQueue } from "Tools/TaskQueue";
 import { Screen } from "Components/Screen";
 import { ScreenLoader } from "Components/ScreenLoader";
 import { Preloader } from "Tools/Preloader";
-import { TimedPromise } from "Tools/TimedPromise";
 import { Router } from "./Router";
+import type { ComponentModule, WrappedLoader } from "./types";
 
-export class App extends Component<Props> {
+export class App extends Component<Record<string, never>> {
+  static preloaded = false;
   static routes = {
-    home: lazy(() => import("Pages/Home")),
-    work: lazy(() => import("Pages/Work")),
-    contact: lazy(() => import("Pages/Contact")),
-    privacypolicy: lazy(() => import("Pages/PrivacyPolicy")),
+    home: this.wrapLoader(() => import("Pages/Home")),
+    work: this.wrapLoader(() => import("Pages/Work")),
+    contact: this.wrapLoader(() => import("Pages/Contact")),
+    privacypolicy: this.wrapLoader(() => import("Pages/PrivacyPolicy")),
   };
+
+  static wrapLoader(loader: () => Promise<ComponentModule>) {
+    return () =>
+      new Promise<ComponentModule>(resolve => {
+        const promises: WrappedLoader = [loader()];
+        if (!this.preloaded) {
+          this.preloaded = true;
+          promises.push(Preloader.initialize());
+        }
+        void Promise.all(promises).then(([component]) => {
+          resolve(component);
+        });
+      });
+  }
 
   public override componentDidMount() {
     ScreenState.initialize();
-    void new TimedPromise({
-      threshold: 2000,
-      task: () => Preloader.initialize(),
-      onReject: ({ remainingMS }) => Routing.initialize(remainingMS),
-      onResolve: ({ remainingMS }) => Routing.initialize(remainingMS),
-    }).race();
   }
 
   public override shouldComponentUpdate() {
@@ -44,5 +52,3 @@ export class App extends Component<Props> {
     );
   }
 }
-
-type Props = Record<string, never>;

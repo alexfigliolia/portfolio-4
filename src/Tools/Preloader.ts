@@ -18,7 +18,7 @@ import EatLarge from "Images/republic-large.jpg";
 
 export class Preloader {
   public static initialize() {
-    const loadFNs: Promise<unknown>[] = [];
+    const loadFNs: Promise<any>[] = [];
     const loaded: HTMLImageElement[] = [];
     const imgs =
       Screen.getState().width >= 670 ? this.largeImages : this.smallImages;
