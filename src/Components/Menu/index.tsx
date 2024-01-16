@@ -17,9 +17,9 @@ class MenuRenderer extends Component<Props> {
     const { open } = this.props;
     return (
       <nav className={`menu ${open ? "open" : ""}`}>
-        <Link id="linkHome" letters={MenuRenderer.home} />
-        <Link id="linkWork" letters={MenuRenderer.work} />
-        <Link id="linkContact" letters={MenuRenderer.contact} />
+        <Link id="linkHome" to="Home" letters={MenuRenderer.home} />
+        <Link id="linkWork" to="Work" letters={MenuRenderer.work} />
+        <Link id="linkContact" to="Contact" letters={MenuRenderer.contact} />
       </nav>
     );
   }
