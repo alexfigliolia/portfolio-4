@@ -1,1 +1,0 @@
-export { Ripples } from "./Ripples";

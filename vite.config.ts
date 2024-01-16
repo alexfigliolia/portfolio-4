@@ -42,4 +42,7 @@ export default defineConfig({
       viteNext: true,
     }),
   ],
+  optimizeDeps: {
+    include: ["@figliolia/ripples"],
+  },
 });
