@@ -1,8 +1,7 @@
 import type { MouseEvent, TouchEvent } from "react";
 import React, { Component } from "react";
-import { TaskQueue } from "Tools/TaskQueue";
-import "./styles.scss";
 import type { Coordinate } from "./types";
+import "./styles.scss";
 
 export class Button3D extends Component<Props, State> {
   private top = 0;
@@ -15,7 +14,6 @@ export class Button3D extends Component<Props, State> {
       rotX: 0,
       rotY: 0,
       scale: 1,
-      reset: false,
       bTransDur: 0.5,
       boxShadow: "none",
     };
@@ -26,22 +24,14 @@ export class Button3D extends Component<Props, State> {
     this.mouseLeaveButton = this.mouseLeaveButton.bind(this);
   }
 
-  override componentDidMount() {
-    TaskQueue.deferTask(() => {
-      this.setState({ reset: true });
-    }, this.props.delay);
-  }
-
   override shouldComponentUpdate(
-    { active }: Props,
-    { rotX, rotY, bTransDur, scale, reset, boxShadow }: State,
+    _: Props,
+    { rotX, rotY, bTransDur, scale, boxShadow }: State,
   ) {
     const curState = this.state;
     if (rotX !== curState.rotX) return true;
     else if (rotY !== curState.rotY) return true;
-    else if (reset !== curState.reset) return true;
     else if (scale !== curState.scale) return true;
-    else if (active !== this.props.active) return true;
     else if (bTransDur !== curState.bTransDur) return true;
     else if (boxShadow !== curState.boxShadow) return true;
     return false;
@@ -109,21 +99,19 @@ export class Button3D extends Component<Props, State> {
     this.setState({
       rotX: 0,
       rotY: 0,
-      bTransDur: "0.5s",
       scale: 1,
+      bTransDur: "0.5s",
       boxShadow: "none",
     });
   }
 
   override render() {
-    const { text, onClick, active } = this.props;
-    const { rotX, rotY, reset, bTransDur, scale, boxShadow } = this.state;
+    const { text, onClick } = this.props;
+    const { rotX, rotY, bTransDur, scale, boxShadow } = this.state;
     return (
       <button
         onClick={onClick}
-        className={`outline-button ${active ? "active" : ""} ${
-          reset ? "reset" : ""
-        }`}
+        className="outline-button"
         onMouseEnter={this.mouseEnterButton}
         onMouseMove={this.mouseMoveButton}
         onMouseLeave={this.mouseLeaveButton}
@@ -142,15 +130,12 @@ export class Button3D extends Component<Props, State> {
 }
 interface Props {
   text: string;
-  delay: number;
-  active: boolean;
   onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 interface State {
   rotX: number;
   rotY: number;
-  reset: boolean;
   bTransDur: number | string;
   scale: number;
   boxShadow: string;

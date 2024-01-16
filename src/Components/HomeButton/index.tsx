@@ -2,16 +2,28 @@ import React, { Component } from "react";
 import { Button3D } from "Components/Button3D";
 import type { IRouting } from "Models/types";
 import { connectRouter } from "State/Routing";
+import { TaskQueue } from "Tools/TaskQueue";
 import "./styles.scss";
 
-export class HomeButtonRenderer extends Component<Props> {
+export class HomeButtonRenderer extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
+    this.state = { reset: false };
     this.nav = this.nav.bind(this);
   }
 
-  override shouldComponentUpdate({ active }: Props) {
-    return active !== this.props.active;
+  UNSAFE_componentWillReceiveProps({ active }: Props) {
+    if (!this.props.active && active) {
+      TaskQueue.deferTask(() => {
+        this.setState({ reset: true });
+      }, 3100);
+    }
+  }
+
+  override shouldComponentUpdate({ active }: Props, { reset }: State) {
+    if (active !== this.props.active) return true;
+    if (reset !== this.state.reset) return true;
+    return false;
   }
 
   private nav() {
@@ -19,15 +31,14 @@ export class HomeButtonRenderer extends Component<Props> {
   }
 
   override render() {
+    const { reset } = this.state;
     const { active } = this.props;
     return (
-      <div className="home-button">
-        <Button3D
-          text="Work"
-          delay={10000}
-          active={active}
-          onClick={this.nav}
-        />
+      <div
+        className={`home-button ${active ? " active" : ""} ${
+          reset ? "reset" : ""
+        }`}>
+        <Button3D text="Work" onClick={this.nav} />
       </div>
     );
   }
@@ -35,6 +46,10 @@ export class HomeButtonRenderer extends Component<Props> {
 
 interface Props {
   active: boolean;
+}
+
+interface State {
+  reset: boolean;
 }
 
 const mSTP = ({ screenActive }: IRouting) => {

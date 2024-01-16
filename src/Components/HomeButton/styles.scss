@@ -3,6 +3,7 @@
 .home-button {
 	margin-top: 40px;
 	&>.outline-button {
+		pointer-events: none;
 		color: transparent;
 		text-shadow: none;
 		font-size: 1.2em;
@@ -43,7 +44,7 @@
 	}
 }
 
-.home-button > .outline-button.active {
+.home-button.active > .outline-button {
 	color: #fff;
 	text-shadow: 0px 2.5px 5px rgba(#000, 0.8), 0px 0px 7.5px rgba(#000, 0.5);
 	&:after,
@@ -65,7 +66,9 @@
 	}
 }
 
-.home-button > .outline-button.active.reset {
+.home-button.active.reset > .outline-button {
+	color: #fff;
+	pointer-events: auto;
 	transition: transform 0.5s 0s, box-shadow 0.5s 0s, color 0.3s 0.1s, text-shadow 0.3s 0.1s;
 	&:after,
 	&:before {
