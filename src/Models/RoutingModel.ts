@@ -16,9 +16,16 @@ export class RoutingModel extends BaseModel<IRouting> {
   constructor() {
     super("Router", {
       loading: true,
+      menuOpen: false,
       routeName: "home",
       screenActive: false,
       classes: "screen shrink flip",
+    });
+  }
+
+  public toggleMenu() {
+    this.update(state => {
+      state.menuOpen = !state.menuOpen;
     });
   }
 

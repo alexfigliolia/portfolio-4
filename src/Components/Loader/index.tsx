@@ -10,9 +10,9 @@ export class Loader extends Component {
     return (
       <div className="loader">
         <div>
-          <span></span>
-          <span></span>
-          <span></span>
+          <span />
+          <span />
+          <span />
         </div>
       </div>
     );

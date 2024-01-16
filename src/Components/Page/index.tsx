@@ -1,38 +1,64 @@
-import type { FC, ReactNode } from "react";
-import React, { useLayoutEffect, useRef } from "react";
-import { useScreen } from "State/Screen";
+import type { ReactNode } from "react";
+import React, { Component } from "react";
 import { Ripples } from "@figliolia/ripples";
+import type { ReactiveStates } from "@figliolia/react-galena";
+import { connectNavigation } from "State/Connections";
 
-export const Page: FC<Props> = ({ name, children }) => {
-  const RIPRef = useRef<Ripples | null>(null);
-  const DOMRef = useRef<null | HTMLElement>(null);
-  const width = useScreen(state => state.width);
-  const height = useScreen(state => state.height);
-  useLayoutEffect(() => {
-    if (!DOMRef.current) {
+class PageRenderer extends Component<Props> {
+  private Ripples?: Ripples;
+  private Node?: HTMLDivElement;
+  constructor(props: Props) {
+    super(props);
+    this.cacheInstance = this.cacheInstance.bind(this);
+  }
+
+  override componentDidMount() {
+    if (!this.Node) {
       return;
     }
-    RIPRef.current = new Ripples(DOMRef.current, {
+    this.Ripples = new Ripples(this.Node, {
       resolution: 512,
       dropRadius: 10,
       perturbance: 0.02,
     });
-    return () => {
-      RIPRef.current?.destroy();
-    };
-  }, []);
-  return (
-    <main
-      id="page"
-      ref={DOMRef}
-      style={{ height, width }}
-      className={`page ${name}`}>
-      {children}
-    </main>
-  );
-};
+  }
+
+  override componentWillUnmount() {
+    if (this.Ripples) {
+      this.Ripples.destroy();
+    }
+  }
+
+  private cacheInstance(node: HTMLDivElement) {
+    this.Node = node;
+  }
+
+  override render() {
+    const { name, height, width, active, children } = this.props;
+    return (
+      <main
+        id="page"
+        ref={this.cacheInstance}
+        style={{ height, width }}
+        className={`page ${name} ${active ? "active" : ""}`}>
+        {children}
+      </main>
+    );
+  }
+}
 
 interface Props {
   name: string;
+  width: number;
+  height: number;
+  active: boolean;
   children: ReactNode;
 }
+
+const mSTP = ([{ width, height }, { screenActive }]: ReactiveStates<
+  typeof connectNavigation
+>) => {
+  return { width, height, active: screenActive };
+};
+
+export const Page = connectNavigation(mSTP)(PageRenderer);

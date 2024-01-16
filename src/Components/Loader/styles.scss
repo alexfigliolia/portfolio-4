@@ -3,8 +3,12 @@
 .loader {
 	height: 150px;
 	width: 150px;
+	will-change: transform;
 	@media #{$mq-670} {
 		transform: scale(1.5);
+	}
+	@media (pointer:none), (pointer:coarse) {
+		margin-top: -20%;
 	}
 }
 
@@ -43,31 +47,31 @@
 {
 	0%
 	{
-		transform: translateZ(-65px);
+		transform: translate3d(0,0,-65px);
 		width: 100%;
 		height: 100%;
 	}
 	25%
 	{
-		transform: translateZ(65px);
+		transform: translate3d(0,0,65px);
 		width: 100%;
 		height: 100%;
 	}
 	50%
 	{
-		transform: translateZ(65px);
+		transform: translate3d(0,0,65px);
 		width: 35%;
 		height: 35%;
 	}
 	75%
 	{
-		transform: translateZ(-65px);
+		transform: translate3d(0,0,-65px);
 		width: 35%;
 		height: 35%;
 	}
 	100%
 	{
-		transform: translateZ(-65px);
+		transform: translate3d(0,0,-65px);
 		width: 100%;
 		height: 100%;
 	}

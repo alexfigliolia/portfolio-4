@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Letter } from "./Letter";
 import "./styles.scss";
 
 export class AlexText extends Component {
@@ -13,25 +12,21 @@ export class AlexText extends Component {
   override render() {
     return (
       <div className="alex-text">
-        <h1>
-          {AlexText.Alex.map((letter, i) => {
+        <h1 id="alex">
+          {AlexText.Alex.map(letter => {
             return (
-              <Letter
-                key={letter}
-                delay={(AlexText.Alex.length - i + 1) * 50 + 200}
-                letter={letter}
-              />
+              <div className="text-letter" key={letter}>
+                {letter}
+              </div>
             );
           })}
         </h1>
-        <h1>
+        <h1 id="figliolia">
           {AlexText.Figliolia.map((letter, i) => {
             return (
-              <Letter
-                key={`${letter}-${i}`}
-                delay={(AlexText.Figliolia.length - i + 1) * 50}
-                letter={letter}
-              />
+              <div className="text-letter" key={`${letter}-${i}`}>
+                {letter}
+              </div>
             );
           })}
         </h1>

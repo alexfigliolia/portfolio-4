@@ -501,10 +501,10 @@
   dependencies:
     "@figliolia/galena" "^2.2.4"
 
-"@figliolia/ripples@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@figliolia/ripples/-/ripples-1.0.0.tgz#136b21475c61db922fdc92397bf4c02992a7dba5"
-  integrity sha512-3fSKWw+vIQNlS46OcSEeyjnzB9FUoTf82c+sb9E50n7xUW/f1j+TtFTqNSZJkWHt/IzmIMNF7QShHxpLb80Qxw==
+"@figliolia/ripples@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@figliolia/ripples/-/ripples-1.0.2.tgz#2a4b63161de3c11f286472dd0d5faad32de16189"
+  integrity sha512-Ix/7DRi6UGaUjEUoS8y7YyULWJyARDv+eDQF0nmeYPlVqo5q5RpBl2OIEJ7TSq8fghfoETmxTP9RfQEYoeRsxg==
 
 "@figliolia/task-queue@^1.0.2":
   version "1.0.2"

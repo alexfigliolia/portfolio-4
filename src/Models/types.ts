@@ -1,6 +1,7 @@
 export interface IRouting {
   classes: string;
   loading: boolean;
+  menuOpen: boolean;
   routeName: string;
   screenActive: boolean;
 }
