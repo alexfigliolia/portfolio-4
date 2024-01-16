@@ -7,6 +7,8 @@
 	background-size: cover;
 	perspective: 1000px;
 	user-select: none;
+	height: 100%;
+	width: 100%;
 	@media #{$mq-670} {
 		background: url("Images/background-large.webp") no-repeat center;
 		background-size: cover;

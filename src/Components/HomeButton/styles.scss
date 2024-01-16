@@ -29,13 +29,19 @@
 				transform-origin: 50% 100%;
 			}
 		}
+		// @media #{$mq-670} {
+		// 	font-size: 1.5em;
+		// 	&>div {
+		// 		padding: 22.5px 60px;
+		// 	}
+		// }
+		// @media #{$mq-957} {
+		// 	font-size: 1.5em;
+		// 	&>div {
+		// 		padding: 22.5px 60px;
+		// 	}
+		// }
 		@media #{$mq-670} {
-			font-size: 1.5em;
-			&>div {
-				padding: 22.5px 60px;
-			}
-		}
-		@media #{$mq-1350} {
 			font-size: 1.75em;
 			&>div {
 				padding: 25px 70px;

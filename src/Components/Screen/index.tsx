@@ -5,7 +5,7 @@ import { connectNavigation } from "State/Connections";
 import "./styles.scss";
 
 class ScreenRenderer extends Component<Props> {
-  public render() {
+  override render() {
     const { front, back, height, width, classes } = this.props;
     return (
       <div className={classes} style={{ height, width }}>

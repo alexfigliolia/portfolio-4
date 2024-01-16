@@ -119,7 +119,7 @@ export class Button3D extends Component<Props, State> {
         onTouchEnd={this.mouseLeaveButton}
         onTouchMove={this.touchMoveButton}
         style={{
-          transform: `rotateX(${rotX}deg) rotateY(${rotY}deg) skew(-5deg) scale(${scale})`,
+          transform: `rotateX(${rotX}deg) rotateY(${rotY}deg) skew(-10deg) scale(${scale})`,
           transitionDuration: `${bTransDur}`,
           boxShadow,
         }}>

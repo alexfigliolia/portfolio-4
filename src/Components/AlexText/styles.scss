@@ -3,39 +3,45 @@
 .alex-text {
 	@include center;
 	flex-direction: column;
+	@media #{$mq-957} {
+		margin-top: -6%;
+	}
 	&>h1 {
 		@include center;
 		font-weight: 900;
-		margin: -20px 0;
 		color: #fff;
-		letter-spacing: -7.5px;
-		font-size: 115px;
+		margin: -5vw 0;
+		letter-spacing: -2vw;
+		font-size: 25vw;
 		perspective: 1000px;
 		transform: rotateX(-30deg) rotateY(30deg) rotateZ(10deg);
 		text-shadow: 0px 5px 10px rgba(#000, 0.5), 0px 0px 30px rgba(#000, 0.4);
 		@media #{$mq-670} {
-			margin: -25px 0;
-			letter-spacing: -12.5px;
-			font-size: 150px;
+			margin: -3.5vw 0;
+			letter-spacing: -1vw;
+			font-size: 20vw;
+			text-shadow: 0px 7.5px 15px rgba(#000, 0.5), 0px 0px 40px rgba(#000, 0.4);
+		}
+		@media #{$mq-890} {
+			margin: -3vw 0;
+			letter-spacing: -1.5vw;
+			font-size: 17.5vw;
 			text-shadow: 0px 7.5px 15px rgba(#000, 0.5), 0px 0px 40px rgba(#000, 0.4);
 		}
 		@media #{$mq-957} {
-			margin: -35px 0;
-			font-size: 180px;
-			letter-spacing: -15px;
 			text-shadow: 0px 10px 20px rgba(#000, 0.5), 0px 0px 50px rgba(#000, 0.4);
 		}
 		@media #{$mq-1150} {
-			margin: -45px 0;
-			font-size: 210px;
-			letter-spacing: -17.5px;
+			margin: -2.8vw 0;
+			letter-spacing: -1.5vw;
+			font-size: min(16vw, 230px);
 			text-shadow: 0px 12.5px 25px rgba(#000, 0.5), 0px 0px 60px rgba(#000, 0.4);
 		}
 		@media #{$mq-1350} {
-			margin: -45px 0;
-			font-size: 220px;
-			letter-spacing: -20px;
 			text-shadow: 0px 15px 30px rgba(#000, 0.5), 0px 0px 70px rgba(#000, 0.4);
+		}
+		&:first-of-type {
+			margin-top: 0;
 		}
 		&:last-of-type {
 			margin-bottom: 0;
