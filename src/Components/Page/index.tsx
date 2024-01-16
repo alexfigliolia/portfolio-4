@@ -1,26 +1,38 @@
-import type { ReactNode } from "react";
-import React, { Component } from "react";
-import type { IScreen } from "Models/types";
-import { connectScreen } from "State/Screen";
+import type { FC, ReactNode } from "react";
+import React, { useLayoutEffect, useRef } from "react";
+import { useScreen } from "State/Screen";
+import { Ripples } from "@figliolia/ripples";
 
-class PageRenderer extends Component<Props> {
-  render() {
-    const { name, height, width, children } = this.props;
-    return (
-      <main style={{ height, width }} className={`page ${name}`}>
-        {children}
-      </main>
-    );
-  }
-}
+export const Page: FC<Props> = ({ name, children }) => {
+  const RIPRef = useRef<Ripples | null>(null);
+  const DOMRef = useRef<null | HTMLElement>(null);
+  const width = useScreen(state => state.width);
+  const height = useScreen(state => state.height);
+  useLayoutEffect(() => {
+    if (!DOMRef.current) {
+      return;
+    }
+    RIPRef.current = new Ripples(DOMRef.current, {
+      resolution: 512,
+      dropRadius: 10,
+      perturbance: 0.02,
+    });
+    return () => {
+      RIPRef.current?.destroy();
+    };
+  }, []);
+  return (
+    <main
+      id="page"
+      ref={DOMRef}
+      style={{ height, width }}
+      className={`page ${name}`}>
+      {children}
+    </main>
+  );
+};
 
-interface Props extends IScreen {
+interface Props {
   name: string;
   children: ReactNode;
 }
-
-const mSTP = ({ height, width }: IScreen) => {
-  return { height, width };
-};
-
-export const Page = connectScreen(mSTP)(PageRenderer);
