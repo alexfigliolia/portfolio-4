@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import "./styles.scss";
 import { Routing } from "State/Routing";
 import { TaskQueue } from "Tools/TaskQueue";
+import { RoutingModel } from "Models/RoutingModel";
+import "./styles.scss";
 
 export class Link extends Component<Props> {
   override shouldComponentUpdate() {
@@ -9,10 +10,10 @@ export class Link extends Component<Props> {
   }
 
   private nav = () => {
-    Routing.toggleMenu();
+    window.location.hash = `#${this.props.to}`;
     TaskQueue.deferTask(() => {
-      window.location.hash = `#${this.props.to}`;
-    }, 1600);
+      Routing.toggleMenu();
+    }, RoutingModel.shrinkAndFlipDuration);
   };
 
   public override render() {

@@ -99,6 +99,10 @@ export class RoutingModel extends BaseModel<IRouting> {
     });
   }
 
+  public static get shrinkAndFlipDuration() {
+    return this.shrinkDuration + this.screenInnerTransition;
+  }
+
   private static get shrinkDuration() {
     if (window.innerWidth < 957) {
       return this.smallScreenTransition;
