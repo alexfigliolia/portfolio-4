@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { Routing } from "State/Routing";
+import { Routing, connectRouter } from "State/Routing";
 import { TaskQueue } from "Tools/TaskQueue";
 import { RoutingModel } from "Models/RoutingModel";
+import type { IRouting } from "Models/types";
 import "./styles.scss";
 
-export class Link extends Component<Props> {
-  override shouldComponentUpdate() {
-    return false;
+export class LinkRenderer extends Component<Props> {
+  override shouldComponentUpdate({ active }: Props) {
+    return active !== this.props.active;
   }
 
   private nav = () => {
@@ -17,14 +18,17 @@ export class Link extends Component<Props> {
   };
 
   public override render() {
-    const { id, letters } = this.props;
+    const { id, letters, active } = this.props;
     return (
-      <button id={id} onClick={this.nav} className="link">
+      <button
+        id={id}
+        onClick={this.nav}
+        className={`link ${active ? "active" : ""}`}>
         {letters.map((letter, i) => {
           return (
-            <div key={`${letter}-${i}`} className="link-letter">
+            <span key={`${letter}-${i}`} className="link-letter">
               {letter}
-            </div>
+            </span>
           );
         })}
       </button>
@@ -32,8 +36,18 @@ export class Link extends Component<Props> {
   }
 }
 
-interface Props {
+interface OwnProps {
   id: string;
   to: string;
   letters: string[];
 }
+
+interface Props extends OwnProps {
+  active: boolean;
+}
+
+const mSTP = ({ routeName }: IRouting, { to }: OwnProps) => {
+  return { active: routeName.toLowerCase() === to.toLowerCase() };
+};
+
+export const Link = connectRouter(mSTP)(LinkRenderer);

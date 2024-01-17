@@ -7,6 +7,9 @@ import { Preloader } from "Tools/Preloader";
 import { Router } from "./Router";
 import type { ComponentModule, WrappedLoader } from "./types";
 
+// @ts-ignore
+void window?.screen?.orientation?.lock?.("portrait").catch(() => {});
+
 export class App extends Component<Record<string, never>> {
   static preloaded = false;
   static routes = {
