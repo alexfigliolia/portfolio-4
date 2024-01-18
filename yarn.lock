@@ -487,19 +487,19 @@
   resolved "https://registry.yarnpkg.com/@figliolia/event-emitter/-/event-emitter-1.1.2.tgz#38f30c3ebd20a98db2f4c02c20cab9d7e75b8b83"
   integrity sha512-45SrozPyiFZALXnMGK85DU7QbQLnreDJEBCztl2HZGnO5mK0dXkPwYFwgOO/eSfbJG8X4UmchYzchMNLwEGMwg==
 
-"@figliolia/galena@^2.2.5":
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/@figliolia/galena/-/galena-2.2.5.tgz#f7d55907653efddd5b49ba12f33c4b93f4c8ce12"
-  integrity sha512-GcsB/+6qrE+NhYyCmRUArdlD0CD9i7oxT7Bf9lTAWxBrBgUVgFi4GqtKQS84zYgM8Aqz3cNI7cTerEQZqF3qSg==
+"@figliolia/galena@^2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@figliolia/galena/-/galena-2.2.6.tgz#1a089ea9438dfc90b6428a9fc2a85ba0d2067980"
+  integrity sha512-T8iM8W1fIV92yEP4FhGqPW+rumNUeDWoUSBnlWjS25qr09Bg4P/0L/yPMuF7iMKtkkBOQOG1FhvzL+slBTAoxA==
   dependencies:
     "@figliolia/event-emitter" "^1.0.8"
 
-"@figliolia/react-galena@^3.1.7":
-  version "3.1.7"
-  resolved "https://registry.yarnpkg.com/@figliolia/react-galena/-/react-galena-3.1.7.tgz#6886f5f3508ab4cb64c413f9f253c6e469d48c95"
-  integrity sha512-IEANYJfKPmaceLfts/eZA7E02aM1S8NiNR0lUdr0fOWy8gM48V3S8UslFLSOcgZKD9MYMuIW7nxFhkjypwXbww==
+"@figliolia/react-galena@^3.1.8":
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/@figliolia/react-galena/-/react-galena-3.1.8.tgz#bb29a6b653711729230adfb5e2e8e7220caa1758"
+  integrity sha512-dN9oi2MoIvxAfCudusudsOkCNGBzbZQFwlmNCWQcY540uh0LXweeP2YaZrNju/+73wn/AsC1ojNiHsgDmgl4WQ==
   dependencies:
-    "@figliolia/galena" "^2.2.5"
+    "@figliolia/galena" "^2.2.6"
 
 "@figliolia/ripples@^1.0.2":
   version "1.0.2"

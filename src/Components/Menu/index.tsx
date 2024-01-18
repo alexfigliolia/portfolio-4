@@ -5,10 +5,6 @@ import { Link } from "./Link";
 import "./styles.scss";
 
 class MenuRenderer extends Component<Props> {
-  static home = "HOME".split("");
-  static work = "WORK".split("");
-  static contact = "CONTACT".split("");
-
   override shouldComponentUpdate({ open }: Props) {
     return open !== this.props.open;
   }
@@ -17,9 +13,9 @@ class MenuRenderer extends Component<Props> {
     const { open } = this.props;
     return (
       <nav className={`menu ${open ? "open" : ""}`}>
-        <Link id="linkHome" to="Home" letters={MenuRenderer.home} />
-        <Link id="linkWork" to="Work" letters={MenuRenderer.work} />
-        <Link id="linkContact" to="Contact" letters={MenuRenderer.contact} />
+        <Link id="linkHome" to="Home" />
+        <Link id="linkWork" to="Work" />
+        <Link id="linkContact" to="Contact" />
       </nav>
     );
   }
