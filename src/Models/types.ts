@@ -4,6 +4,7 @@ export interface IRouting {
   menuOpen: boolean;
   routeName: string;
   screenActive: boolean;
+  menuButtonDelay: number;
 }
 
 export interface IScreen {

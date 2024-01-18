@@ -19,6 +19,7 @@ export class RoutingModel extends BaseModel<IRouting> {
       menuOpen: false,
       routeName: "home",
       screenActive: false,
+      menuButtonDelay: 10000,
       classes: "screen shrink flip",
     });
   }
@@ -96,6 +97,12 @@ export class RoutingModel extends BaseModel<IRouting> {
   public setRouteName(hash: string) {
     this.update(state => {
       state.routeName = hash;
+    });
+  }
+
+  public setMenuButtonDelay(delay: number) {
+    this.update(state => {
+      state.menuButtonDelay = delay;
     });
   }
 

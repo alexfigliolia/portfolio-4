@@ -2,15 +2,22 @@ import React, { Component } from "react";
 import { connectWork } from "State/Work";
 import type { IWork } from "Models/types";
 import { Title } from "./Title";
+import { Routing } from "State/Routing";
 import "./styles.scss";
 
 class PosterRenderer extends Component<Props> {
   length: number;
   letters: string[];
+  activeDelay: number;
   constructor(props: Props) {
     super(props);
-    this.letters = this.props.name.split("");
+    const { name, active } = this.props;
+    this.letters = name.split("");
     this.length = this.letters.filter(v => v !== " ").length;
+    this.activeDelay = this.length * 50 + 500;
+    if (active) {
+      Routing.setMenuButtonDelay(this.activeDelay + 1000);
+    }
   }
 
   public override shouldComponentUpdate({ active }: Props) {
@@ -32,7 +39,7 @@ class PosterRenderer extends Component<Props> {
           <div
             className="text"
             style={{
-              transitionDelay: `${active ? this.length * 50 + 500 : 0}ms`,
+              transitionDelay: `${active ? this.activeDelay : 0}ms`,
             }}>
             <p>{p1}</p>
             <p>{p2}</p>
