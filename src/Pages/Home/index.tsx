@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Page } from "Components/Page";
 import { AlexText } from "Components/AlexText";
-import { HomeButton } from "Components/HomeButton";
+import { WorkButton } from "./WorkButton";
 import "./styles.scss";
 
 export default class Home extends Component<Record<string, never>> {
@@ -14,7 +14,7 @@ export default class Home extends Component<Record<string, never>> {
       <Page name="home">
         <div>
           <AlexText />
-          <HomeButton />
+          <WorkButton />
         </div>
       </Page>
     );

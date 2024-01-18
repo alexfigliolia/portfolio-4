@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Ripples } from "@figliolia/ripples";
 import type { ReactiveStates } from "@figliolia/react-galena";
 import { connectNavigation } from "State/Connections";
+import "./styles.scss";
 
 class PageRenderer extends Component<Props> {
   private Ripples?: Ripples;

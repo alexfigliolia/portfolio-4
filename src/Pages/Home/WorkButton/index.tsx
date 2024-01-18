@@ -5,7 +5,7 @@ import { connectRouter } from "State/Routing";
 import { TaskQueue } from "Tools/TaskQueue";
 import "./styles.scss";
 
-export class HomeButtonRenderer extends Component<Props, State> {
+export class WorkButtonRenderer extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { reset: false };
@@ -35,7 +35,7 @@ export class HomeButtonRenderer extends Component<Props, State> {
     const { active } = this.props;
     return (
       <div
-        className={`home-button ${active ? " active" : ""} ${
+        className={`work-button ${active ? " active" : ""} ${
           reset ? "reset" : ""
         }`}>
         <Button3D text="Work" onClick={this.nav} />
@@ -56,4 +56,4 @@ const mSTP = ({ screenActive }: IRouting) => {
   return { active: screenActive };
 };
 
-export const HomeButton = connectRouter(mSTP)(HomeButtonRenderer);
+export const WorkButton = connectRouter(mSTP)(WorkButtonRenderer);

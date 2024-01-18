@@ -10,3 +10,7 @@ export interface IScreen {
   width: number;
   height: number;
 }
+
+export interface IWork {
+  index: number;
+}
