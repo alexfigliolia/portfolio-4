@@ -12,16 +12,16 @@
     "test": "ts-node ci/commands/Test.ts"
   },
   "dependencies": {
-    "@figliolia/galena": "^2.2.4",
-    "@figliolia/react-galena": "^3.1.6",
+    "@figliolia/galena": "^2.2.5",
+    "@figliolia/react-galena": "^3.1.7",
     "@figliolia/ripples": "^1.0.2",
+    "@figliolia/task-queue": "^1.0.2",
     "pageswitch": "https://github.com/alexfigliolia/pw.git",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@figliolia/child-process": "^1.0.1",
-    "@figliolia/task-queue": "^1.0.2",
     "@swc/core": "^1.3.99",
     "@types/jest": "^29.5.10",
     "@types/node": "^16.7.13",
@@ -52,7 +52,7 @@
     "ts-node": "^10.9.1",
     "tsc-alias": "^1.8.8",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^4.4.2",
+    "typescript": "^5.3.3",
     "vite": "^5.0.11",
     "vite-plugin-html": "^3.2.1"
   }

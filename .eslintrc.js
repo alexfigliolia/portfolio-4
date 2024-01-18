@@ -5,7 +5,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  ignorePatterns: ["node_modules", "dist", "coverage", "__Stealth__"],
+  ignorePatterns: ["node_modules", "build", "coverage", "__Stealth__"],
   extends: [
     "eslint:recommended",
     "plugin:prettier/recommended",
