@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connectWork } from "State/Work";
 import type { IWork } from "Models/types";
+import { Menu } from "State/Menu";
 import { Title } from "./Title";
-import { Routing } from "State/Routing";
 import "./styles.scss";
 
 class PosterRenderer extends Component<Props> {
@@ -16,7 +16,7 @@ class PosterRenderer extends Component<Props> {
     this.length = this.letters.filter(v => v !== " ").length;
     this.activeDelay = this.length * 50 + 500;
     if (active) {
-      Routing.setMenuButtonDelay(this.activeDelay + 1000);
+      Menu.setButtonDelay(this.activeDelay + 1000);
     }
   }
 

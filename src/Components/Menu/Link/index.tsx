@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Routing, connectRouter } from "State/Routing";
+import { connectRouter } from "State/Routing";
 import { TaskQueue } from "Tools/TaskQueue";
 import { RoutingModel } from "Models/RoutingModel";
 import type { IRouting } from "Models/types";
+import { Menu } from "State/Menu";
 import "./styles.scss";
 
 export class LinkRenderer extends Component<Props> {
@@ -13,7 +14,7 @@ export class LinkRenderer extends Component<Props> {
   private nav = () => {
     window.location.hash = `#${this.props.to}`;
     TaskQueue.deferTask(() => {
-      Routing.toggleMenu();
+      Menu.toggle();
     }, RoutingModel.shrinkAndFlipDuration);
   };
 

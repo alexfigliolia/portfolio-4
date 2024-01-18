@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Burger } from "Components/Burger";
 import { Routing } from "State/Routing";
-import type { IRouting } from "Models/types";
+import { RoutingAndMenu } from "State/States";
+import type { IRoutingAndMenu } from "Models/types";
 import { TaskQueue } from "Tools/TaskQueue";
 
 export class MenuButton extends Component<Props, State> {
@@ -10,7 +11,7 @@ export class MenuButton extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.subscription = this.subscription.bind(this);
-    this.listener = Routing.subscribe(this.subscription);
+    this.listener = RoutingAndMenu.subscribeAll(this.subscription);
   }
 
   override shouldComponentUpdate(_: Props, { active }: State) {
@@ -24,15 +25,18 @@ export class MenuButton extends Component<Props, State> {
     }
   }
 
-  private subscription({ screenActive, menuButtonDelay }: IRouting) {
+  private subscription({ Routing, Menu }: IRoutingAndMenu) {
     const { active } = this.state;
+    const { buttonDelay } = Menu.getState();
+    const { screenActive } = Routing.getState();
     if (!screenActive && active) {
       return this.setState({ active: false });
     }
-    if (screenActive && !active)
+    if (screenActive && !active) {
       TaskQueue.deferTask(() => {
         this.setState({ active: true });
-      }, menuButtonDelay);
+      }, buttonDelay);
+    }
   }
 
   override render() {

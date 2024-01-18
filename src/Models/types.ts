@@ -1,10 +1,11 @@
+import type { MenuModel } from "./MenuModel";
+import type { RoutingModel } from "./RoutingModel";
+
 export interface IRouting {
   classes: string;
   loading: boolean;
-  menuOpen: boolean;
   routeName: string;
   screenActive: boolean;
-  menuButtonDelay: number;
 }
 
 export interface IScreen {
@@ -15,3 +16,14 @@ export interface IScreen {
 export interface IWork {
   index: number;
 }
+
+export interface IMenu {
+  menuOpen: boolean;
+  buttonDelay: number;
+  linksVisible: boolean;
+}
+
+export type IRoutingAndMenu = {
+  Menu: MenuModel;
+  Routing: RoutingModel;
+};

@@ -13,22 +13,6 @@ export class RoutingModel extends BaseModel<IRouting> {
   static largeScreenTransition = this.sliceUnits(
     variables.largeScreenTransition,
   );
-  constructor() {
-    super("Router", {
-      loading: true,
-      menuOpen: false,
-      routeName: "home",
-      screenActive: false,
-      menuButtonDelay: 10000,
-      classes: "screen shrink flip",
-    });
-  }
-
-  public toggleMenu() {
-    this.update(state => {
-      state.menuOpen = !state.menuOpen;
-    });
-  }
 
   public flipScreen() {
     return new Promise<void>(resolve => {
@@ -97,12 +81,6 @@ export class RoutingModel extends BaseModel<IRouting> {
   public setRouteName(hash: string) {
     this.update(state => {
       state.routeName = hash;
-    });
-  }
-
-  public setMenuButtonDelay(delay: number) {
-    this.update(state => {
-      state.menuButtonDelay = delay;
     });
   }
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Routing, connectRouter } from "State/Routing";
-import type { IRouting } from "Models/types";
+import type { IMenu } from "Models/types";
+import { Menu, connectMenu } from "State/Menu";
 import "./styles.scss";
 
 class BurgerButton extends Component<Props> {
@@ -14,7 +14,7 @@ class BurgerButton extends Component<Props> {
   }
 
   private toggle() {
-    Routing.toggleMenu();
+    Menu.toggle();
   }
 
   override render() {
@@ -37,8 +37,8 @@ interface Props {
   menuOpen: boolean;
 }
 
-const mSTP = ({ menuOpen }: IRouting) => {
+const mSTP = ({ menuOpen }: IMenu) => {
   return { menuOpen };
 };
 
-export const Burger = connectRouter(mSTP)(BurgerButton);
+export const Burger = connectMenu(mSTP)(BurgerButton);

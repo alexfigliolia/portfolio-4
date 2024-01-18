@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import type { IRouting } from "Models/types";
-import { connectRouter } from "State/Routing";
+import type { IMenu } from "Models/types";
+import { connectMenu } from "State/Menu";
 import { Link } from "./Link";
 import "./styles.scss";
 
@@ -29,8 +29,8 @@ interface Props {
   open: boolean;
 }
 
-const mSTP = ({ menuOpen }: IRouting) => {
+const mSTP = ({ menuOpen }: IMenu) => {
   return { open: menuOpen };
 };
 
-export const Menu = connectRouter(mSTP)(MenuRenderer);
+export const Menu = connectMenu(mSTP)(MenuRenderer);

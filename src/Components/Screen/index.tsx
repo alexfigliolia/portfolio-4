@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import React, { Component } from "react";
 import type { ReactiveStates } from "@figliolia/react-galena";
-import { connectNavigation } from "State/Connections";
+import { connectNavigationAndMenu } from "State/Connections";
 import { Menu } from "Components/Menu";
 import { MenuButton } from "./MenuButton";
 import "./styles.scss";
@@ -36,9 +36,10 @@ interface Props {
 
 const mSTP = ([
   { height, width },
-  { loading, classes, menuOpen },
-]: ReactiveStates<typeof connectNavigation>) => {
+  { loading, classes },
+  { menuOpen },
+]: ReactiveStates<typeof connectNavigationAndMenu>) => {
   return { height, width, loading, classes, menuOpen };
 };
 
-export const Screen = connectNavigation(mSTP)(ScreenRenderer);
+export const Screen = connectNavigationAndMenu(mSTP)(ScreenRenderer);
