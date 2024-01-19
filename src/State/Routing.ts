@@ -8,7 +8,7 @@ export const Routing = RoutingAndMenu.composeState(
     loading: true,
     routeName: "home",
     screenActive: false,
-    classes: "screen shrink flip",
+    classes: "screen shrink flip hidden",
   },
   RoutingModel,
 );

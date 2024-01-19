@@ -15,6 +15,12 @@ export class RoutingModel extends BaseModel<IRouting> {
     variables.largeScreenTransition,
   );
 
+  public show() {
+    this.update(state => {
+      state.classes = state.classes.replaceAll(" hidden", "");
+    });
+  }
+
   public flipScreen() {
     return new Promise<void>(resolve => {
       this.loading(true);

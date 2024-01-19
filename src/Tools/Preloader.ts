@@ -15,6 +15,8 @@ import CommerceSmall from "Images/gnocchi-small.jpg";
 import CommerceLarge from "Images/gnocchi.jpg";
 import EatSmall from "Images/republic-small.jpg";
 import EatLarge from "Images/republic-large.jpg";
+import BackgroundSmall from "Images/background-small.webp";
+import BackgroundLarge from "Images/background-large.webp";
 
 export class Preloader {
   public static initialize() {
@@ -24,11 +26,18 @@ export class Preloader {
       Screen.getState().width >= 670 ? this.largeImages : this.smallImages;
     for (let i = 0; i < imgs.length; i++) {
       const img = new Image();
+      loadFNs[i] = this.promisify(img);
       img.src = imgs[i];
       loaded[i] = img;
-      loadFNs[i] = this.promisify(img);
     }
     return Promise.all(loadFNs);
+  }
+
+  public static loadBackground() {
+    const img = new Image();
+    const loader = this.promisify(img);
+    img.src = this.background;
+    return loader;
   }
 
   private static promisify(image: HTMLImageElement) {
@@ -36,6 +45,10 @@ export class Preloader {
       image.onload = resolve;
       image.onerror = resolve;
     });
+  }
+
+  private static get background() {
+    return window.innerWidth >= 670 ? BackgroundLarge : BackgroundSmall;
   }
 
   private static readonly smallImages = [
