@@ -28,7 +28,7 @@
 	border: 15px solid #fff;
 	box-sizing: border-box;
 	border-radius: 50%;
-	box-shadow: 0 10px 0 #e0e0e0, inset 0 10px 0 #e0e0e0;
+	box-shadow: 0 10px 0 #e0e0e0, inset 0 10px 0 #e0e0e0, 0px 2.5px 15px rgba(#000, 0.8);
 	animation: animate 4.5s ease-in-out infinite;
 }
 .loader span:nth-child(1)
