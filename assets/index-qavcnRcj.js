@@ -1,0 +1,1 @@
+import{r,j as e}from"./index-r74TsC42.js";import{P as s}from"./index-ZeJABIbY.js";class a extends r.Component{render(){return e.jsx(s,{name:"privacy-policy",children:"Privacy Policy!"})}}export{a as default};
