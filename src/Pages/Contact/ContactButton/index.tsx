@@ -5,12 +5,8 @@ import { connectRouter } from "State/Routing";
 import { TaskQueue } from "Tools/TaskQueue";
 import "./styles.scss";
 
-export class WorkButtonRenderer extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { reset: false };
-    this.nav = this.nav.bind(this);
-  }
+export class ContactButtonRenderer extends Component<Props, State> {
+  state: State = { reset: false };
 
   override UNSAFE_componentWillReceiveProps({ active }: Props) {
     if (!this.props.active && active) {
@@ -26,26 +22,24 @@ export class WorkButtonRenderer extends Component<Props, State> {
     return false;
   }
 
-  private nav() {
-    window.location.hash = "#Work";
-  }
-
   override render() {
     const { reset } = this.state;
-    const { active } = this.props;
+    const { text, onClick, active } = this.props;
     return (
       <div
-        className={`work-button ${active ? " active" : ""} ${
+        className={`contact-button ${active ? " active" : ""} ${
           reset ? "reset" : ""
         }`}>
-        <Button3D text="Work" onClick={this.nav} />
+        <Button3D text={text} onClick={onClick} />
       </div>
     );
   }
 }
 
 interface Props {
+  text: string;
   active: boolean;
+  onClick: () => void;
 }
 
 interface State {
@@ -56,4 +50,4 @@ const mSTP = ({ screenActive }: IRouting) => {
   return { active: screenActive };
 };
 
-export const WorkButton = connectRouter(mSTP)(WorkButtonRenderer);
+export const ContactButton = connectRouter(mSTP)(ContactButtonRenderer);

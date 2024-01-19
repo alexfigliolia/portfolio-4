@@ -8,11 +8,11 @@
 	color: #fff;
 	font-weight: 900;
 	position: relative;
-	background-color: transparent;
-	transform: rotateX(-30deg) rotateY(30deg) rotateZ(10deg);
 	font-size: min(20vw, 150px);
 	letter-spacing: -1.5vw;
 	transition: letter-spacing 0.2s;
+	background-color: transparent;
+	transform: rotateX(-30deg) rotateY(30deg) rotateZ(10deg);
 	text-shadow: 0px 5px 10px rgba(#000, 0.5), 0px 0px 30px rgba(#000, 0.4);
 	@media #{$mq-800} {
 		margin: 0;
@@ -139,7 +139,7 @@
 .menu.open > .link.active#linkContact {
 	&::after {
 		transform: scaleX(1);
-		transition: transform 0.5s 2500s;
+		transition: transform 0.5s 2500ms;
 	}
 }
 
