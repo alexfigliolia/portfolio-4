@@ -1,0 +1,21 @@
+@import "Styles/variables.scss";
+
+.poster > article > .poster-title {
+	@include center;
+	color: #fff;
+	font-size: min(12.5vw, 70px);
+	text-transform: uppercase;
+	letter-spacing: max(-1vw, -7.5px);
+	font-weight: 900;
+	margin: 0;
+	text-shadow: 0px 2.5px 5px rgba(#000, 0.4), 0px 2.5px 15px rgba(#000, 0.5);
+	&>div {
+		opacity: 0;
+		transform: scale(0) rotateX(180deg) translateY(-150%);
+	}
+}
+		
+.page.work.active .poster.active > article > .poster-title > div {
+	opacity: 1;
+	transform: scale(1) rotateX(0deg) translateY(0%);
+}

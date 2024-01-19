@@ -1,22 +1,24 @@
 import React, { Component } from "react";
-import { connectWork } from "State/Work";
-import type { IWork } from "Models/types";
+import type { ReactiveStates } from "@figliolia/react-galena";
+import { workConnection } from "State/Connections";
 import { Menu } from "State/Menu";
 import { Title } from "./Title";
+import { Content } from "./Content";
 import "./styles.scss";
 
-class PosterRenderer extends Component<Props> {
+class PosterRenderer extends Component<Props, State> {
   length: number;
   letters: string[];
   activeDelay: number;
+  state: State = { expanded: false };
   constructor(props: Props) {
     super(props);
-    const { name, active } = this.props;
+    const { name, posterActive } = this.props;
     this.letters = name.split("");
     this.length = this.letters.filter(v => v !== " ").length;
     this.activeDelay = this.length * 50 + 500;
-    if (active) {
-      Menu.setButtonDelay(this.activeDelay + 1000);
+    if (posterActive) {
+      Menu.setButtonDelay(this.activeDelay + 2200);
     }
   }
 
@@ -25,25 +27,23 @@ class PosterRenderer extends Component<Props> {
   }
 
   override render() {
-    const { p1, p2, imgSmall, imgLarge, active } = this.props;
+    const { p1, p2, imgSmall, imgLarge, active, url } = this.props;
     return (
       <div
         className={`poster ${active ? "active" : ""}`}
         style={{
-          // @ts-ignore
           "--background-small": `url(${imgSmall})`,
           "--background-large": `url(${imgLarge})`,
         }}>
         <article>
           <Title letters={this.letters} length={this.length} />
-          <div
-            className="text"
-            style={{
-              transitionDelay: `${active ? this.activeDelay : 0}ms`,
-            }}>
-            <p>{p1}</p>
-            <p>{p2}</p>
-          </div>
+          <Content
+            p1={p1}
+            p2={p2}
+            url={url}
+            active={active}
+            delay={this.activeDelay}
+          />
         </article>
       </div>
     );
@@ -62,10 +62,21 @@ interface OwnProps {
 
 interface Props extends OwnProps {
   active: boolean;
+  posterActive: boolean;
 }
 
-const mSTP = ({ index: activeIndex }: IWork, { index }: OwnProps) => {
-  return { active: activeIndex === index };
+interface State {
+  expanded: boolean;
+}
+
+const mSTP = (
+  [{ index: activeIndex }, { screenActive }]: ReactiveStates<
+    typeof workConnection
+  >,
+  { index }: OwnProps,
+) => {
+  const posterActive = activeIndex === index;
+  return { active: posterActive && screenActive, posterActive };
 };
 
-export const Poster = connectWork(mSTP)(PosterRenderer);
+export const Poster = workConnection(mSTP)(PosterRenderer);

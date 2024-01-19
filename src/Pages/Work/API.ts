@@ -19,7 +19,7 @@ export default [
   {
     name: "Atlassian",
     p1: "At Atlassian, I worked as a full-stack engineer aimed at improving Confluence performance and developer experience",
-    p2: "I built tools designed to automate dependency removal, analyze JavaScript delivery to the browser, improve performance, automate redundant tasks, and more",
+    p2: "I built tools designed to automate dependency removal, analyze JavaScript delivery to the browser, improve caching, and more",
     url: "https://www.atlassian.com/software/confluence",
     imgSmall: ATLSmall,
     imgLarge: ATLLarge,

@@ -10,11 +10,12 @@ export default class Work extends Component<Record<string, never>> {
   private PW?: PW;
 
   override componentDidMount() {
+    const { index } = WorkState.getState();
     this.PW = new PageSwitch("workSlider", {
       duration: 750,
       direction: 1,
       transition: "scrollCover",
-      start: WorkState.getState().index,
+      start: index < 0 ? 0 : index,
       loop: true,
       mousewheel: true,
       mouse: true,

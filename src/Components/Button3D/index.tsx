@@ -1,6 +1,6 @@
 import type { MouseEvent, TouchEvent } from "react";
 import React, { Component } from "react";
-import type { Coordinate } from "./types";
+import type { Coordinate, Props } from "./types";
 import "./styles.scss";
 
 export class Button3D extends Component<Props, State> {
@@ -128,10 +128,6 @@ export class Button3D extends Component<Props, State> {
     );
   }
 }
-interface Props {
-  text: string;
-  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
-}
 
 interface State {
   rotX: number;
@@ -140,3 +136,5 @@ interface State {
   scale: number;
   boxShadow: string;
 }
+
+export * from "./types";
