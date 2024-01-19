@@ -1,4 +1,5 @@
 import { TaskQueue } from "Tools/TaskQueue";
+import { Menu } from "State/Menu";
 import variables from "Styles/exports.module.scss";
 import { BaseModel } from "./BaseModel";
 import type { IRouting } from "./types";
@@ -21,6 +22,7 @@ export class RoutingModel extends BaseModel<IRouting> {
       TaskQueue.deferTask(() => {
         this.flip();
         TaskQueue.deferTask(() => {
+          Menu.close();
           this.activateScreen(false);
           resolve();
         }, RoutingModel.screenInnerTransition);
@@ -56,7 +58,7 @@ export class RoutingModel extends BaseModel<IRouting> {
 
   public unShrink() {
     this.update(state => {
-      state.classes = state.classes.replace(" shrink", "");
+      state.classes = state.classes.replaceAll(" shrink", "");
     });
   }
 
@@ -68,7 +70,7 @@ export class RoutingModel extends BaseModel<IRouting> {
 
   public unFlip() {
     this.update(state => {
-      state.classes = state.classes.replace(" flip", "");
+      state.classes = state.classes.replaceAll(" flip", "");
     });
   }
 
